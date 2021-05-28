@@ -24,7 +24,7 @@ namespace SendKeysDemo
             }
 
             SetForegroundWindow(process.MainWindowHandle);
-            SendKeys.SendWait("test");
+            SendKeys.SendWait("these keystrokes brought to you by SendKeys{ENTER}");
 
             //test capturing a screenshot of the process
             var screenshot = ScreenCapture.CaptureWindow(process.MainWindowHandle);
