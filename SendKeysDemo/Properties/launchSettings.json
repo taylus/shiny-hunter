@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "SendKeysDemo": {
+      "commandName": "Executable",
+      "executablePath": "dotnet.exe",
+      "commandLineArgs": "SendKeysDemo.dll"
+    }
+  }
+}
