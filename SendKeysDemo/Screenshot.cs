@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
 namespace SendKeysDemo
@@ -42,15 +44,21 @@ namespace SendKeysDemo
             return new Rectangle(rect.Left, rect.Top, rect.Right - rect.Left, rect.Bottom - rect.Top);
         }
 
-        public static Bitmap CaptureWindow(IntPtr handle)
+        public static Bitmap CaptureWindow(Process process)
         {
-            var bounds = GetWindowRectangle(handle);
+            var bounds = GetWindowRectangle(process.MainWindowHandle);
             var result = new Bitmap(bounds.Width, bounds.Height);
             using (var graphics = Graphics.FromImage(result))
             {
                 graphics.CopyFromScreen(new Point(bounds.Left, bounds.Top), Point.Empty, bounds.Size);
             }
             return result;
+        }
+
+        public static void Save(Process process, string path)
+        {
+            var screenshot = CaptureWindow(process);
+            screenshot.Save(path, ImageFormat.Png);
         }
     }
 }
