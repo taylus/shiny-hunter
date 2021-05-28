@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using System.Windows.Forms;
@@ -7,26 +8,31 @@ namespace SendKeysDemo
 {
     public class EmulatorController
     {
-        private readonly Process emulator;
+        private readonly IEnumerable<Process> emulators;
 
-        public EmulatorController(Process emulatorProcess)
+        public EmulatorController(IEnumerable<Process> emulatorProcesses)
         {
-            emulator = emulatorProcess;
+            emulators = emulatorProcesses;
         }
 
         public void Reset()
         {
-            Win32.SetForegroundWindow(emulator);
-            SendKeys.SendWait("^r");
+            foreach (var emulator in emulators)
+            {
+                Console.WriteLine($"Resetting emulator {emulator.Id}");
+                Win32.SetForegroundWindow(emulator, millisecondsToSleepAfter: 100);
+                SendKeys.SendWait("^r");
+            }
         }
 
         public void Press(Button button)
         {
             var command = ButtonToSendKeysString(button);
-            if (command != null)
+            if (command == null) return;
+            foreach (var emulator in emulators)
             {
-                Win32.SetForegroundWindow(emulator);
-                Console.WriteLine($"Pressing {{{button}}}");
+                Win32.SetForegroundWindow(emulator, millisecondsToSleepAfter: 100);
+                Console.WriteLine($"Pressing {{{button}}} in emulator {emulator.Id}");
                 SendKeys.SendWait(command);
             }
         }
