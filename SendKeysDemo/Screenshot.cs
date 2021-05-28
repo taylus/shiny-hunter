@@ -4,9 +4,15 @@ using System.Runtime.InteropServices;
 
 namespace SendKeysDemo
 {
-    //https://stackoverflow.com/a/24879511/7512368 plus adjustments from https://www.cyotek.com/blog/getting-a-window-rectangle-without-the-drop-shadow
-    //to eliminate the annoying drop shadow borders around the window size reported from GetWindowRect
-    public class ScreenCapture
+    /// <summary>
+    /// Take screenshots of windows using Win32 interop.
+    /// </summary>
+    /// <remarks>
+    /// Adapted from <see cref="https://stackoverflow.com/a/24879511/7512368"/> and
+    /// <see cref="https://www.cyotek.com/blog/getting-a-window-rectangle-without-the-drop-shadow"/>
+    /// to eliminate the annoying drop shadow borders around the window size reported from GetWindowRect.
+    /// </remarks>
+    public class Screenshot
     {
         [StructLayout(LayoutKind.Sequential)]
         private struct Rect
@@ -18,7 +24,7 @@ namespace SendKeysDemo
         }
 
         [DllImport("dwmapi.dll")]
-        static extern int DwmGetWindowAttribute(IntPtr handle, int dwAttribute, out Rect pvAttribute, int cbAttribute);
+        private static extern int DwmGetWindowAttribute(IntPtr handle, int dwAttribute, out Rect pvAttribute, int cbAttribute);
 
         private const int DWMWA_EXTENDED_FRAME_BOUNDS = 9;
         private const int S_OK = 0;

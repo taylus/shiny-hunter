@@ -18,8 +18,7 @@ namespace SendKeysDemo
             var process = Process.GetProcessesByName("notepad").FirstOrDefault();
             if (process == null)
             {
-                Console.Error.WriteLine("notepad is not running");
-                Console.Error.Flush();
+                Console.Error.WriteLine("Error: notepad is not running");
                 Environment.Exit(-1);
             }
 
@@ -27,7 +26,7 @@ namespace SendKeysDemo
             SendKeys.SendWait("these keystrokes brought to you by SendKeys{ENTER}");
 
             //test capturing a screenshot of the process
-            var screenshot = ScreenCapture.CaptureWindow(process.MainWindowHandle);
+            var screenshot = Screenshot.CaptureWindow(process.MainWindowHandle);
             var screenshotFileName = $"{Guid.NewGuid()}.png";
             screenshot.Save(screenshotFileName, ImageFormat.Png);
             Process.Start(new ProcessStartInfo() { FileName = screenshotFileName, UseShellExecute = true });
