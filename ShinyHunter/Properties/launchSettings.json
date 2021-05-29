@@ -1,9 +1,9 @@
 {
   "profiles": {
-    "SendKeysDemo": {
+    "ShinyHunter": {
       "commandName": "Executable",
       "executablePath": "dotnet.exe",
-      "commandLineArgs": "SendKeysDemo.dll"
+      "commandLineArgs": "ShinyHunter.dll"
     }
   }
 }

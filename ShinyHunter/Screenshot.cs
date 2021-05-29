@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
-namespace SendKeysDemo
+namespace ShinyHunter
 {
     /// <summary>
     /// Take screenshots of windows using Win32 interop.

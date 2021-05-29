@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 
-namespace SendKeysDemo
+namespace ShinyHunter
 {
     public class Program
     {
@@ -52,7 +52,7 @@ namespace SendKeysDemo
 
             //decline naming the starter, skip through Gary's dialogue
             Thread.Sleep(TimeSpan.FromMilliseconds(3500 / fastForwardSpeed));
-            controller.SpamPress(Button.B, 10, TimeSpan.FromMilliseconds(400 / fastForwardSpeed));
+            controller.SpamPress(Button.B, 6, TimeSpan.FromMilliseconds(400 / fastForwardSpeed));
 
             //open menu and check the starter for shiny
             controller.Press(Button.Start);

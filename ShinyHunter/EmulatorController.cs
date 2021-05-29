@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace SendKeysDemo
+namespace ShinyHunter
 {
     public class EmulatorController
     {

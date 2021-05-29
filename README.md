@@ -11,7 +11,7 @@ The shiny ⭐ icon on the Pokemon's status page is detected by looking for its c
 ```cmd
 > start mGBA.exe "path_to_pokemon_fire_red.gba"
 > start mGBA.exe "path_to_pokemon_fire_red.gba"
-> dotnet run --project .\SendKeysDemo\SendKeysDemo.csproj
+> dotnet run --project .\ShinyHunter\ShinyHunter.csproj
 ```
 
 ![screenshot](screenshot.png)

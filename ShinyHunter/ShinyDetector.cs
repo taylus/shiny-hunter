@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace SendKeysDemo
+namespace ShinyHunter
 {
     public static class ShinyDetector
     {
