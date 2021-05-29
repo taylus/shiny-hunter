@@ -28,14 +28,15 @@ namespace SendKeysDemo
             Console.ReadLine();
             Console.WriteLine("Beginning shiny hunt!");
 
+            bool foundShiny = false;
             var screenshotDir = Directory.CreateDirectory(DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss"));
-            for (int attempt = 1; attempt <= 8192; attempt++)
+            for (int attempt = 1; !foundShiny; attempt++)
             {
-                ShinyHuntFireRedStarterSoftReset(emulators, attempt, screenshotDir.Name, fastForwardSpeed);
+                foundShiny = ShinyHuntFireRedStarterSoftReset(emulators, attempt, screenshotDir.Name, fastForwardSpeed);
             }
         }
 
-        private static void ShinyHuntFireRedStarterSoftReset(Process[] emulators, int attempt, string screenshotDir, double fastForwardSpeed = 1)
+        private static bool ShinyHuntFireRedStarterSoftReset(Process[] emulators, int attempt, string screenshotDir, double fastForwardSpeed = 1)
         {
             var controller = new EmulatorController(emulators);
             controller.Reset();
@@ -66,7 +67,13 @@ namespace SendKeysDemo
                 {
                     var screenshotFile = Path.Combine(screenshotDir, $"{attempt:0000}_{emulator.Id}.png");
                     Console.WriteLine($"Saving screenshot {screenshotFile}");
-                    Screenshot.Save(emulator, screenshotFile);
+                    var screenshot = Screenshot.CaptureWindow(emulator);
+                    screenshot.Save(screenshotFile);
+                    if (ShinyDetector.IsShiny(screenshot))
+                    {
+                        Console.WriteLine($"Found a shiny in emulator {emulator.Id} after {attempt} attempts!");
+                        return true;
+                    }
                 }
                 catch (Exception)
                 {
@@ -74,6 +81,8 @@ namespace SendKeysDemo
                     throw;
                 }
             }
+
+            return false;
         }
     }
 }

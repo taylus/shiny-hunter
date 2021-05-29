@@ -54,11 +54,5 @@ namespace SendKeysDemo
             }
             return result;
         }
-
-        public static void Save(Process process, string path)
-        {
-            var screenshot = CaptureWindow(process);
-            screenshot.Save(path, ImageFormat.Png);
-        }
     }
 }
